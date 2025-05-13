@@ -8,7 +8,7 @@
   vars:
     vcenter_hostname: "vc01.galaxy.local"
     vcenter_username: "administrator@vsphere.local"
-    vcenter_password: "C113@c114"
+    vcenter_password: "C113@c113"
     validate_certs: false
 
   # Documentation
