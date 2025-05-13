@@ -1,0 +1,22 @@
+---
+- name: Get vCenter Host Info
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - vmware.vmware_rest
+
+  # Documentation
+  # https://galaxy.ansible.com/ui/repo/published/vmware/vmware_rest/content/module/vcenter_host_info/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW
+
+  tasks:
+    - name: Gather info about all ESXi hosts in vCenter
+      vcenter_host_info:
+        vcenter_hostname: vc01.galaxy.local
+        vcenter_username: administrator@vsphere.local
+        vcenter_password: C113@c113
+        vcenter_validate_certs: false
+      register: host_info
+
+    - name: Display ESXi host info
+      debug:
+        var: host_info.value

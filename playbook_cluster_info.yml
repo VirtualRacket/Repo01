@@ -1,0 +1,29 @@
+---
+- name: Get vCenter Host Info
+  hosts: localhost
+  gather_facts: no
+  collections:
+    - vmware.vmware_rest
+
+  vars:
+    vcenter_hostname: "vc01.galaxy.local"
+    vcenter_username: "administrator@vsphere.local"
+    vcenter_password: "C113@c113"
+    validate_certs: false
+
+  # Documentation
+  # https://galaxy.ansible.com/ui/repo/published/vmware/vmware/content/module/cluster_info/
+
+  tasks:
+    - name: Gather Information About All Clusters In a Datacenter
+      vmware.vmware.cluster_info:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter_name: Datacenter
+        validate_certs: false
+      register: _out
+
+    - name: Show available datacenters
+      debug:
+        var: _out
